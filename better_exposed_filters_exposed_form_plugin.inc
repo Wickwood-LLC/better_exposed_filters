@@ -690,6 +690,7 @@ Title Desc|Z -> A</pre> Leave the replacement value blank to remove an option al
         '#collapsible' => TRUE,
         '#collapsed' => $secondary_collapse,
         '#theme' => 'secondary_exposed_elements',
+        '#info' => array(),
       );
     }
 
@@ -1455,6 +1456,7 @@ Title Desc|Z -> A</pre> Leave the replacement value blank to remove an option al
           $secondary[$identifier] = $form[$identifier];
           unset($form[$identifier]);
           $secondary[$identifier]['#title'] = $form['#info'][$filter_key]['label'];
+          $secondary['#info'][$filter_key] = $form['#info'][$filter_key];
           unset($form['#info'][$filter_key]);
          }
       }
