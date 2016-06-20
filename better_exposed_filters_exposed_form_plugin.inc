@@ -827,6 +827,7 @@ dateFormat: "dd-mm-yy"
         '#collapsible' => TRUE,
         '#collapsed' => $secondary_collapse,
         '#theme' => 'secondary_exposed_elements',
+        '#info' => array(),
       );
     }
 
