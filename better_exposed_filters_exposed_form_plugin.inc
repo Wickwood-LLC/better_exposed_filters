@@ -1095,7 +1095,6 @@ dateFormat: "dd-mm-yy"
         foreach (array('items_per_page', 'offset') as $elem) {
           if (!empty($form[$elem])) {
             $secondary[$elem] = $form[$elem];
-            dpm($secondary);
             unset($form[$elem]);
           }
         }
