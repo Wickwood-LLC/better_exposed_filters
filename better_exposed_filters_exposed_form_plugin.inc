@@ -853,6 +853,7 @@ dateFormat: "dd-mm-yy"
         '#collapsible' => TRUE,
         '#collapsed' => $secondary_collapse,
         '#theme' => 'secondary_exposed_elements',
+        '#info' => array(),
       );
     }
 
@@ -1742,10 +1743,12 @@ dateFormat: "dd-mm-yy"
             // fields on an in-between filter. In those cases Add the label
             // to the first element.
             $secondary[$identifier][$children[0]]['#title'] = isset($form['#info'][$filter_key]['label']) ? $form['#info'][$filter_key]['label'] : '';
+            $secondary['#info'][$filter_key] = $form['#info'][$filter_key];
             unset($form['#info'][$filter_key]);
           }
           else {
             $secondary[$identifier]['#title'] = isset($form['#info'][$filter_key]['label']) ? $form['#info'][$filter_key]['label'] : '';
+            $secondary['#info'][$filter_key] = $form['#info'][$filter_key];
             unset($form['#info'][$filter_key]);
           }
 
