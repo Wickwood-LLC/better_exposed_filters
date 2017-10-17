@@ -835,12 +835,9 @@ dateFormat: "dd-mm-yy"
         $secondary_collapse = $settings['general']['secondary_collapse_override'] == 2;
       }
       else {
-        $exposed_input = $this->view->get_exposed_input();
+        // Check for input on secondary filters
         foreach ($this->display->handler->get_handlers('filter') as $label => $filter) {
-          if (!$filter->options['exposed']) {
-            continue;
-          }
-          if (!empty($exposed_input[$filter->options['expose']['identifier']]) && $settings[$label]['more_options']['is_secondary']) {
+          if ($this->filter_has_exposed_input($filter) && $settings[$label]['more_options']['is_secondary']) {
             $secondary_collapse = FALSE;
             break;
           }
@@ -2155,5 +2152,39 @@ dateFormat: "dd-mm-yy"
         $storage[$parent] = $value;
       }
     }
+  }
+
+  /**
+   * Detect whether a filter has exposed input or not.
+   *
+   * @param $filter
+   *   The views exposed filter handler
+   * @return TRUE if filter has exposed input that also differs from it's
+   *   default value(s).
+   */
+  function filter_has_exposed_input($filter) {
+    // Ignore filters that are not exposed or are not secondary
+    if (!$filter->options['exposed']) {
+      return FALSE;
+    }
+    $exposed_input = $this->view->get_exposed_input();
+    $identifier = $filter->options['expose']['identifier'];
+    if (!isset($exposed_input[$identifier])) {
+      return FALSE;
+    }
+    $filter_input = $exposed_input[$identifier];
+    $default_value = $filter->value;
+    if ($filter->options['expose']['multiple']) {
+      sort($filter_input);
+      sort($default_value);
+    }
+    else {
+      $default_value = is_array($default_value) ? array_shift($default_value) : $default_value;
+      // When "All" is input, the default value is empty
+      if (strtolower($filter_input) == 'all') {
+        $filter_input = "";
+      }
+    }
+    return $filter_input != $default_value;
   }
 }
