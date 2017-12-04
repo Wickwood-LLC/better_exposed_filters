@@ -6,3 +6,6 @@ package = Views
 dependencies[] = views
 files[] = better_exposed_filters_exposed_form_plugin.inc
 files[] = tests/better_exposed_filters.test
+
+version = "7.x-3.5"
+project = "better_exposed_filters"
