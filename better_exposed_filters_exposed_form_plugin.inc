@@ -1755,8 +1755,8 @@ dateFormat: "dd-mm-yy"
           // along to the theme function for rendering. Multiply existing
           // position by 2 so that we have room to stick the exposed operator
           // before the filter.
-          if (isset($filters[$identifier]->position)) {
-            $secondary[$identifier]['#bef_position'] = $filters[$identifier]->position * 2;
+          if (isset($filters[$label]->position)) {
+            $secondary[$identifier]['#bef_position'] = $filters[$label]->position * 2;
           }
 
           // Move exposed operators with exposed filters
@@ -1767,8 +1767,8 @@ dateFormat: "dd-mm-yy"
 
             // Make sure operators appear just before the filter they are
             // associated with.
-            if (isset($filters[$identifier]->position)) {
-              $secondary[$op_id]['#bef_position'] = ($filters[$identifier]->position * 2) - 1;
+            if (isset($filters[$label]->position)) {
+              $secondary[$op_id]['#bef_position'] = ($filters[$label]->position * 2) - 1;
             }
           }
         }
